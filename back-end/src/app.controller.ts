@@ -1,9 +1,7 @@
 import {
   Controller,
-  FileTypeValidator,
   HttpCode,
   HttpStatus,
-  MaxFileSizeValidator,
   ParseFilePipe,
   Post,
   UploadedFile,
@@ -23,8 +21,8 @@ export class AppController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 10000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
+          //new MaxFileSizeValidator({ maxSize: 10000 }),
+          //new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )
@@ -43,8 +41,8 @@ export class AppController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 10000 }),
-          new FileTypeValidator({ fileType: 'image/jpeg' }),
+          //new MaxFileSizeValidator({ maxSize: 10000 }),
+          //new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )
