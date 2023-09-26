@@ -1,11 +1,11 @@
 import {
   Controller,
-  HttpCode,
-  HttpStatus,
-  ParseFilePipe,
+  UseInterceptors,
   Post,
   UploadedFile,
-  UseInterceptors,
+  ParseFilePipe,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -17,12 +17,12 @@ export class AppController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   @HttpCode(HttpStatus.CREATED)
-  addImageToDb(
+  addToDB(
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          //new MaxFileSizeValidator({ maxSize: 10000 }),
-          //new FileTypeValidator({ fileType: 'image/jpeg' }),
+          // new MaxFileSizeValidator({ maxSize: 10000 }),
+          // new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )
@@ -33,7 +33,6 @@ export class AppController {
       file.originalname,
     );
   }
-
   @Post('image-search')
   @UseInterceptors(FileInterceptor('file'))
   @HttpCode(HttpStatus.CREATED)
@@ -41,8 +40,8 @@ export class AppController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          //new MaxFileSizeValidator({ maxSize: 10000 }),
-          //new FileTypeValidator({ fileType: 'image/jpeg' }),
+          // new MaxFileSizeValidator({ maxSize: 10000 }),
+          // new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )
