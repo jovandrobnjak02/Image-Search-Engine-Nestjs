@@ -12,7 +12,7 @@ export class AppService {
     });
   }
 
-  async addToDatabase(b64: string, fileName: string) {
+  async addImageToDatabase(b64: string, fileName: string) {
     await this.client.data
       .creator()
       .withClassName('Images')
@@ -21,17 +21,21 @@ export class AppService {
         text: fileName,
       })
       .do();
-    return { statu: HttpStatus.CREATED, message: 'Added New Image' };
+
+    return { status: HttpStatus.CREATED, message: 'Added new Image' };
   }
+
   async getNearImage(image: string) {
     const resImage = await this.client.graphql
       .get()
       .withClassName('Images')
       .withFields('image')
       .withNearImage({ image, certainty: 0.8 })
-      .withLimit(2)
+      .withLimit(1)
       .do();
-    const imgs = await resImage.data.Get.Images;
-    return imgs;
+
+    const img = await resImage.data.Get.Image;
+
+    return img;
   }
 }
